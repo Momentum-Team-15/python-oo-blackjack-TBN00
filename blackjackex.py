@@ -20,12 +20,12 @@ class Game:
         print("The dealer's cards are : ")
         for card in self.dealer.hand:
             print(card)
-        print(f'Total: {self.calculate_hand(self.dealer)}\n')
+        print(f'Dealer total: {self.calculate_hand(self.dealer)}\n')
 
         print("The player's cards are : ")
         for card in self.player.hand:
             print(card)
-        print(f'Total :{self.calculate_hand(self.player)}\n')
+        print(f'Your total :{self.calculate_hand(self.player)}\n')
 
         # print(f'Cards remaining: {len(self.deck.cards)}')
 
@@ -102,3 +102,24 @@ while new_game.calculate_hand(new_game.dealer) < 17:
     #     for card in new_game.dealer.hand:
     #         print(card)
     #     print('\n')
+
+
+def hitit():
+    hit_stay = input("Would you like to hit? 'Y' or 'N' ").upper()
+    if hit_stay == 'Y':
+        new_game.deal_card(new_game.player)
+        for card in new_game.player.hand:
+            print(card)
+        print(f'Your total: {new_game.calculate_hand(new_game.player)}\n')
+        if new_game.calculate_hand(new_game.player) > 21:
+            print('Bust, you lose')
+            exit()
+        hitit()
+    elif hit_stay == 'N':
+        for card in new_game.player.hand:
+            print(card)
+        print(f'Your total: {new_game.calculate_hand(new_game.player)}\n')
+    else:
+        hitit()
+
+hitit()
