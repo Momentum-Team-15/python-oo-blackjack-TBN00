@@ -18,9 +18,10 @@ class Game:
         self.deal_card(self.player)
 
         print("The dealer's cards are : ")
-        for card in self.dealer.hand:
-            print(card)
-        print(f'Dealer total: {self.calculate_hand(self.dealer)}\n')
+        print("Hidden")
+        print(f'{self.dealer.hand[1]}\n')
+
+        # print(f'Dealer total: {self.calculate_hand(self.dealer)}\n')
 
         print("The player's cards are : ")
         for card in self.player.hand:
@@ -75,37 +76,32 @@ class Dealer:
 new_game = Game()
 
 if new_game.calculate_hand(new_game.dealer) == 21:
-    print('Dealer has blackjack')
+    print('Dealer has BlackJack!')
     if new_game.calculate_hand(new_game.player) == 21:
         print('Push')
 
-    else:
-        print('You lose')
-
 elif new_game.calculate_hand(new_game.player) == 21:
-    print('Blackjack! you win')
+    print('You have BlackJack!')
 
 while new_game.calculate_hand(new_game.dealer) < 17:
     print('Dealer hits\n')
     new_game.deal_card(new_game.dealer)
-    for card in new_game.dealer.hand:
+    print('Hidden')
+    for card in new_game.dealer.hand[1:]:
         print(card)
-    print(f'Total: {new_game.calculate_hand(new_game.dealer)}\n')
+    print('\n')
     if new_game.calculate_hand(new_game.dealer) > 21:
         print(f'Dealer bust {new_game.calculate_hand(new_game.dealer)}')
+        for card in new_game.dealer.hand:
+            print(card)
+        exit()
 
     elif new_game.calculate_hand(new_game.dealer) == 21:
         print('Dealer has 21')
 
-    # else:
-    #     print("Dealer's hand")
-    #     for card in new_game.dealer.hand:
-    #         print(card)
-    #     print('\n')
-
-
-def hitit():
-    hit_stay = input("Would you like to hit? 'Y' or 'N' ").upper()
+def hit():
+    hit_stay = input("Would you like to hit? 'Y' or 'N': ").upper()
+    print('\n')
     if hit_stay == 'Y':
         new_game.deal_card(new_game.player)
         for card in new_game.player.hand:
@@ -114,12 +110,21 @@ def hitit():
         if new_game.calculate_hand(new_game.player) > 21:
             print('Bust, you lose')
             exit()
-        hitit()
+        hit()
     elif hit_stay == 'N':
         for card in new_game.player.hand:
             print(card)
         print(f'Your total: {new_game.calculate_hand(new_game.player)}\n')
+        for card in new_game.dealer.hand:
+            print(card)
+        print(f'Dealer total {new_game.calculate_hand(new_game.dealer)}')
+        if new_game.calculate_hand(new_game.player) > new_game.calculate_hand(new_game.dealer):
+            print('\nYou win')
+        elif new_game.calculate_hand(new_game.player) == new_game.calculate_hand(new_game.dealer):
+            print('\nTie game')
+        else:
+            print('\nYou lose')
     else:
-        hitit()
+        hit()
 
-hitit()
+hit()

@@ -86,15 +86,21 @@
 #     print('Blackjack! you win')
 
 # while new_game.calculate_hand(new_game.dealer) < 17:
-#     print('Dealer hits')
 #     new_game.deal_card(new_game.dealer)
-#     for card in new_game.dealer.hand:
-#         print(card)
+#     print('Dealer hits')
 #     if new_game.calculate_hand(new_game.dealer) > 21:
 #         print(f'Dealer bust {new_game.calculate_hand(new_game.dealer)}')
+#         break
 
 #     elif new_game.calculate_hand(new_game.dealer) == 21:
 #         print('Dealer has 21')
+#         break
 
-#     else:
-#         print(f"Dealers hand is {new_game.dealer.hand}")
+# else:
+#     print('Dealer hand = ')
+#     [print(card) for card in new_game.dealer.hand]
+
+#     print('Player hand = ')
+#     [print(card) for card in new_game.player.hand]
+#     choice = input("Would you like to (h)it or (s)tay?").lower()
+#     if choice
